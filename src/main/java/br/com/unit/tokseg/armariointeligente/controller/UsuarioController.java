@@ -34,7 +34,7 @@ public class UsuarioController {
     }
 
     @GetMapping
-    @PreAuthorize("hasRole('ADMINISTRADOR')")
+   // @PreAuthorize("hasRole('ADMINISTRADOR')")
     public ResponseEntity<?> listarUsuarios() {
         return ResponseEntity.ok(usuarioService.listarUsuarios());
     }
