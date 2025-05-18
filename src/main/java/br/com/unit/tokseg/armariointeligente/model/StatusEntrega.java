@@ -5,5 +5,6 @@ public enum StatusEntrega {
     ENTREGUE,
     RETIRADO,
     CANCELADO,
-    EXPIRADO
+    EXPIRADO,
+    AGUARDANDO_RETIRADA
 }
