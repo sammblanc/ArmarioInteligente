@@ -1,6 +1,5 @@
 package br.com.unit.tokseg.armariointeligente.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -31,6 +30,9 @@ public class Usuario {
 
     @Column(nullable = false)
     private String telefone;
+    
+    @Column(nullable = false)
+    private boolean ativo = true;
 
     @ManyToOne
     @JoinColumn(name = "tipo_usuario_id", nullable = false)
@@ -45,6 +47,7 @@ public class Usuario {
         this.senha = senha;
         this.telefone = telefone;
         this.tipoUsuario = tipoUsuario;
+        this.ativo = true;
     }
 
     public Long getId() {
@@ -81,6 +84,14 @@ public class Usuario {
 
     public String getTelefone() {
         return telefone;
+    }
+    
+    public boolean isAtivo() {
+        return ativo;
+    }
+
+    public void setAtivo(boolean ativo) {
+        this.ativo = ativo;
     }
 
     public void setTipoUsuario(TipoUsuario tipoUsuario) {

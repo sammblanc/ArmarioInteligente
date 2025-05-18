@@ -41,9 +41,6 @@ public class Condominio {
     @Column
     private String email;
 
-    @Column
-    private String responsavel;
-
     @OneToMany(mappedBy = "condominio", cascade = CascadeType.ALL)
     @JsonIgnore
     private List<Armario> armarios;

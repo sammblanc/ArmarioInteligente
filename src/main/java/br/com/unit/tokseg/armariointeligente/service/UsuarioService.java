@@ -2,6 +2,8 @@ package br.com.unit.tokseg.armariointeligente.service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import br.com.unit.tokseg.armariointeligente.exception.BadRequestException;
@@ -57,12 +59,20 @@ public class UsuarioService {
         usuario.setSenha(passwordEncoder.encode(usuario.getSenha()));
         
         usuario.setTipoUsuario(tipoUsuario);
+        usuario.setAtivo(true);
         return usuarioRepository.save(usuario);
     }
 
     @Transactional
     public List<Usuario> listarUsuarios() {
         return usuarioRepository.findAll();
+    }
+    
+    @Transactional
+    public List<Usuario> listarUsuariosAtivos() {
+        return usuarioRepository.findAll().stream()
+                .filter(Usuario::isAtivo)
+                .collect(Collectors.toList());
     }
 
     @Transactional
@@ -110,6 +120,24 @@ public class UsuarioService {
         }
 
         return usuarioRepository.save(usuarioExistente);
+    }
+    
+    @Transactional
+    public Usuario desativarUsuario(Long id) {
+        Usuario usuario = usuarioRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Usuário", "id", id));
+        
+        usuario.setAtivo(false);
+        return usuarioRepository.save(usuario);
+    }
+    
+    @Transactional
+    public Usuario ativarUsuario(Long id) {
+        Usuario usuario = usuarioRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Usuário", "id", id));
+        
+        usuario.setAtivo(true);
+        return usuarioRepository.save(usuario);
     }
 
     @Transactional

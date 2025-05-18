@@ -39,6 +39,11 @@ public class UsuarioController {
         return ResponseEntity.ok(usuarioService.listarUsuarios());
     }
 
+    @GetMapping(value = "/ativos")
+    public ResponseEntity<?> listarUsuariosAtivos() {
+        return ResponseEntity.ok(usuarioService.listarUsuariosAtivos());
+    }
+
     @GetMapping("/{id}")
     @PreAuthorize("hasRole('ADMINISTRADOR') or @usuarioServiceImpl.isCurrentUser(#id)")
     public ResponseEntity<?> buscarUsuarioPorId(@PathVariable Long id) {
@@ -55,6 +60,20 @@ public class UsuarioController {
     public ResponseEntity<?> atualizarUsuario(@PathVariable Long id, @RequestBody Usuario usuario) {
         Usuario usuarioAtualizado = usuarioService.atualizarUsuario(id, usuario);
         return ResponseEntity.ok(usuarioAtualizado);
+    }
+
+    @PutMapping("/{id}/desativar")
+    @PreAuthorize("hasRole('ADMINISTRADOR')")
+    public ResponseEntity<?> desativarUsuario(@PathVariable Long id) {
+        Usuario usuarioDesativado = usuarioService.desativarUsuario(id);
+        return ResponseEntity.ok(usuarioDesativado);
+    }
+
+    @PutMapping("/{id}/ativar")
+    @PreAuthorize("hasRole('ADMINISTRADOR')")
+    public ResponseEntity<?> ativarUsuario(@PathVariable Long id) {
+        Usuario usuarioAtivado = usuarioService.ativarUsuario(id);
+        return ResponseEntity.ok(usuarioAtivado);
     }
 
     @DeleteMapping("/{id}")

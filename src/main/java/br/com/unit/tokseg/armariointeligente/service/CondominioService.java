@@ -86,9 +86,7 @@ public class CondominioService {
             condominioExistente.setEmail(condominio.getEmail());
         }
 
-        if (condominio.getResponsavel() != null) {
-            condominioExistente.setResponsavel(condominio.getResponsavel());
-        }
+        // Removida a referência ao atributo responsavel que não existe mais no modelo
 
         return condominioRepository.save(condominioExistente);
     }

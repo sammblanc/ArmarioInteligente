@@ -109,7 +109,6 @@ public class DataInitializer {
                         condominio1.setEstado("PE");
                         condominio1.setTelefone("(81) 3333-4444");
                         condominio1.setEmail("contato@parquedasflores.com");
-                        condominio1.setResponsavel("Carlos Mendes");
                         condominio1 = condominioRepository.save(condominio1);
                         
                         Condominio condominio2 = new Condominio();
@@ -120,7 +119,6 @@ public class DataInitializer {
                         condominio2.setEstado("PE");
                         condominio2.setTelefone("(81) 3333-5555");
                         condominio2.setEmail("contato@solardaspalmeiras.com");
-                        condominio2.setResponsavel("Ana Beatriz");
                         condominio2 = condominioRepository.save(condominio2);
                         
                         System.out.println("Condomínios criados com sucesso!");
